@@ -1,0 +1,151 @@
+%%% 多値論理研究会用マクロ
+%%% Time-stamp: <2020-12-12 21:58:50 hirayama>
+%%%
+%%% パッケージの作り方の参考情報:
+%%% https://en.wikibooks.org/wiki/LaTeX/Creating_Packages
+%%%
+%%% 使い方: LaTeX本文中で
+%%% \usepackage[mvlforum]{mymvlmacros} (多値論理フォーラムの場合)または
+%%% \usepackage[mvlnishuken]{mymvlmacros} (多値論理二種研の場合)
+%%%
+%%% 多値論理フォーラムでは，LaTeX本文中で，下記のパラメタを設定すること
+%%% -------
+%%% \renewcommand{\mvlvolume}{27} % 多値論理フォーラムの巻号
+%%% \renewcommand{\mvlpresennumber}{11} % 多値論理フォーラムの発表番号
+%%% \renewcommand{\mvlyear}{2015} % 年
+%%% \renewcommand{\mvlmonth}{9} % 月
+%%% -------
+%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mymvlmacros}
+
+%\RequirePackage{}
+
+%% 多値論理フォーラム用のヘッダ
+\newcommand{\mvlvolume}{0}
+\newcommand{\mvlpresennumber}{0}
+\newcommand{\mvlyear}{0}
+\newcommand{\mvlmonth}{0}
+\newcommand{\mvlmonthname}{January}
+\renewcommand{\mvlmonthname}{\ifcase\mvlmonth Zero\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi}
+\newcommand{\@mvlforumheader}{}
+
+%% 'mvlforum' option
+\DeclareOption{mvlforum}{
+\textwidth=170mm\textheight=240mm
+% 多値論理フォーラムの余白メモ: 上下に25mm，左右に17mm
+% 多値論理フォーラム用のヘッダを表示する。
+ \renewcommand{\@mvlforumheader}{
+  \begin{minipage}[b]{\textwidth}
+  \fontsize{12pt}{15pt}\selectfont
+  \textbf{多値論理研究ノート}\hfill
+  \textbf{第{\mvlvolume}巻\hspace{1em}{\mvlpresennumber}号}\hfill
+  \textbf{{\mvlyear}年 {\mvlmonth}月}\\
+  Note on Multiple-Valued Logic in Japan\\
+  \hfill Vol.{\mvlvolume},  No.{\mvlpresennumber}, {\mvlmonthname} {\mvlyear}\\
+  \rule[0.5em]{\textwidth}{0.5pt}
+  \end{minipage}
+  }
+\renewcommand{\thepage}{{\mvlpresennumber}--\arabic{page}}
+% 多値論理フォーラムでは，ページ番号をXX-1のようにする。
+}
+
+%% 'mvlnishuken' option
+\DeclareOption{mvlnishuken}{
+\textwidth=174mm\textheight=250mm
+% 多値論理二種研の余白メモ: 上下に20mm，左右に15mm
+\renewcommand{\thepage}{}
+% 二種研ではページ番号なし
+}
+
+%% 'mvlnishuken'is the default
+\ExecuteOptions{mvlnishuken}
+
+\ProcessOptions\relax %terminates the option processing.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 用紙の余白の設定
+
+% 文面を中央に合わせる
+\newdimen\sheetwidth \newdimen\sheetheight
+\def\Afoursheet{\sheetwidth=210mm \sheetheight=297mm}
+\def\Afivesheet{\sheetwidth=148mm \sheetheight=210mm}
+\def\Bfoursheet{\sheetwidth=257mm \sheetheight=363mm}
+\def\Bfivesheet{\sheetwidth=182mm \sheetheight=257mm}
+\def\Lettersheet{\sheetwidth=8.5in \sheetheight=11in}
+
+\def\sheetcenter{ \oddsidemargin=\sheetwidth
+ \advance\oddsidemargin-\textwidth \oddsidemargin=0.5\oddsidemargin
+ \advance\oddsidemargin-1in \evensidemargin=\oddsidemargin
+ \topmargin=\sheetheight \advance\topmargin-\textheight
+ \topmargin=0.5\topmargin \advance\topmargin-\headheight
+ \advance\topmargin-\headsep \advance\topmargin-1in }
+
+%\textwidth=174mm\textheight=250mm %これらの設定はDeclareOptionsのところで
+\Afoursheet\sheetcenter
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% タイトルページ
+
+%% 日本語名と英語名を上下ペアで表示する。
+\newcommand{\mydoublename}[2]{\begin{tabular}{c}{#1}\\{#2}\end{tabular}}
+
+%% 2段組みにおいて、アブストラクトは1段ぶちぬきにする。
+\newcommand{\@myabstract}{}
+\renewcommand{\abstract}[2][概要]{
+ \newcommand{\@myabstractcontents}{#2}
+ \newcommand{\@myabstractname}{#1}
+ \renewcommand{\@myabstract}{
+    \begin{quote}\textbf{{\@myabstractname}:} \@myabstractcontents\end{quote}
+    \vskip 1.5em
+ }
+}
+%% '\abstract'の使い方例
+%% 例1: 通常は，出だしが「概要:」になる。
+% \abstract{本論文では，新しい下界を与える。}
+% →概要: 本論文では，新しい下界を与える。
+%% 例2: 出だしを変えたいときは，オプション引数で指定する。
+% \abstract[要旨]{本論文では，新しい下界を与える。}
+% →要旨: 本論文では，新しい下界を与える。
+%% 例3: 英語
+% \abstract[Abstract]{This paper presents a new lower bound.}
+% →Abstract: This paper presents a new lower bound.
+
+%% タイトル
+%%
+%% '\@maketitle'を変更した。
+%% 変更元: jarticle.cls
+%% 主な変更点:
+%% ・タイトルの上に余白を追加していたのを，しないようにした。
+%% ・多値論理フォーラム用のヘッダを追加した。
+%% ・ぶちぬきアブストラクトを追加した。
+%% ・'\date'は無視するようにした。
+\def\@maketitle{%
+  \centering
+  \let\footnote\thanks
+    \@mvlforumheader {\LARGE \@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+%    \vskip 1em%
+%    {\large \@date}%
+  \par\vskip 1.5em
+  \@myabstract
+}
+
+%% 参考文献リストの行間スペースを削減する
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{%
+  \oldbibliography{#1}%
+  \small
+  \setlength{\itemsep}{0pt}%
+  \setlength{\parskip}{0pt}%
+}
+
+\endinput % this must be the last command in a package.
