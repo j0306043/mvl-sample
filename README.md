@@ -5,6 +5,6 @@
 
 # ファイルの概要
 
-- mymvlmacros.sty: スタイルファイル本体
+- mymvlmacros.sty: スタイルファイル本体。多値論理フォーラムと多値論理二種研の両方に対応。
 - sample.tex: サンプルのLaTeXソース。スタイルファイルの使用例。
 - sample.pdf: sample.texのコンパイル結果。スタイルファイルの出来栄えの例。
