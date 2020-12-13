@@ -20,7 +20,7 @@
   ```
   \usepackage[mvlforum]{mymvlmacros}
   ```
-  - 二種研の場合は、、下記を置きます。
+  - 二種研の場合は、下記を置きます。
   ```
   \usepackage[mvlnishuken]{mymvlmacros}
   ```
