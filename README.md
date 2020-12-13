@@ -17,13 +17,13 @@
 - LaTeXソースと同じディレクトリに、`mymvlmacros.sty`ファイルを置きます。
 - LaTeXソース中に、
   - 多値論理フォーラムの場合は、下記を置きます。
-```
-\usepackage[mvlforum]{mymvlmacros}
-```
+  ```
+  \usepackage[mvlforum]{mymvlmacros}
+  ```
   - 二種研の場合は、、下記を置きます。
-```
-\usepackage[mvlnishuken]{mymvlmacros}
-```
+  ```
+  \usepackage[mvlnishuken]{mymvlmacros}
+  ```
 - 多値論理フォーラムの場合は下記のパラメタを設定します。多値論理二種研の場合は不要です(設定しても無視されます)。
 ```
 \renewcommand{\mvlvolume}{39} % 多値論理フォーラムの巻号
