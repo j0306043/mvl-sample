@@ -1,5 +1,5 @@
 %%% 多値論理研究会用マクロ
-%%% Time-stamp: <2020-12-12 21:58:50 hirayama>
+%%% Time-stamp: <2020-12-24 18:34:21 hirayama>
 %%%
 %%% パッケージの作り方の参考情報:
 %%% https://en.wikibooks.org/wiki/LaTeX/Creating_Packages
@@ -30,10 +30,13 @@
 \newcommand{\mvlmonthname}{January}
 \renewcommand{\mvlmonthname}{\ifcase\mvlmonth Zero\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi}
 \newcommand{\@mvlforumheader}{}
+\newlength{\mvltextwidth}
+\newlength{\mvltextheight}
 
 %% 'mvlforum' option
 \DeclareOption{mvlforum}{
-\textwidth=170mm\textheight=240mm
+\mvltextwidth=170truemm
+\mvltextheight=240truemm
 % 多値論理フォーラムの余白メモ: 上下に25mm，左右に17mm
 % 多値論理フォーラム用のヘッダを表示する。
  \renewcommand{\@mvlforumheader}{
@@ -53,7 +56,8 @@
 
 %% 'mvlnishuken' option
 \DeclareOption{mvlnishuken}{
-\textwidth=174mm\textheight=250mm
+\mvltextwidth=174truemm
+\mvltextheight=250truemm
 % 多値論理二種研の余白メモ: 上下に20mm，左右に15mm
 \renewcommand{\thepage}{}
 % 二種研ではページ番号なし
@@ -64,28 +68,33 @@
 
 \ProcessOptions\relax %terminates the option processing.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 用紙の余白の設定
-
-% 文面を中央に合わせる
+\@ifundefined{setpagelayout}
+{
+%% 原始的な方法で、文面を中央に合わせる
 \newdimen\sheetwidth \newdimen\sheetheight
-\def\Afoursheet{\sheetwidth=210mm \sheetheight=297mm}
-\def\Afivesheet{\sheetwidth=148mm \sheetheight=210mm}
-\def\Bfoursheet{\sheetwidth=257mm \sheetheight=363mm}
-\def\Bfivesheet{\sheetwidth=182mm \sheetheight=257mm}
-\def\Lettersheet{\sheetwidth=8.5in \sheetheight=11in}
+\def\Afoursheet{\sheetwidth=210truemm \sheetheight=297truemm}
+\def\Afivesheet{\sheetwidth=148truemm \sheetheight=210truemm}
+\def\Bfoursheet{\sheetwidth=257truemm \sheetheight=363truemm}
+\def\Bfivesheet{\sheetwidth=182truemm \sheetheight=257truemm}
+\def\Lettersheet{\sheetwidth=8.5truein \sheetheight=11truein}
 
 \def\sheetcenter{ \oddsidemargin=\sheetwidth
  \advance\oddsidemargin-\textwidth \oddsidemargin=0.5\oddsidemargin
- \advance\oddsidemargin-1in \evensidemargin=\oddsidemargin
+ \advance\oddsidemargin-1truein \evensidemargin=\oddsidemargin
  \topmargin=\sheetheight \advance\topmargin-\textheight
  \topmargin=0.5\topmargin \advance\topmargin-\headheight
- \advance\topmargin-\headsep \advance\topmargin-1in }
+ \advance\topmargin-\headsep \advance\topmargin-1truein }
 
-%\textwidth=174mm\textheight=250mm %これらの設定はDeclareOptionsのところで
+\textwidth=\mvltextwidth
+\textheight=\mvltextheight
 \Afoursheet\sheetcenter
-
+}
+{
+%% BXjsclsのやり方で、文面を中央に合わせる
+\setpagelayout{width=\mvltextwidth, height=\mvltextheight, centering}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% タイトルページ
@@ -99,7 +108,10 @@
  \newcommand{\@myabstractcontents}{#2}
  \newcommand{\@myabstractname}{#1}
  \renewcommand{\@myabstract}{
-    \begin{quote}\textbf{{\@myabstractname}:} \@myabstractcontents\end{quote}
+    \centering
+    \begin{minipage}{0.9\textwidth}
+    \textbf{{\@myabstractname}:} \@myabstractcontents
+    \end{minipage}
     \vskip 1.5em
  }
 }
