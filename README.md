@@ -43,12 +43,12 @@
 - フォーラムの場合は、自分の発表番号をつけたページ番号をページ下端につけることになっているので、それに対応しています。
 - 二種研の場合は、ページ番号をつけないことになっているので、ページ番号を出さないようにしています。
 - 参考文献の文字サイズをsmallにします。文献リストの行間スペースを削減します。
-- documentclassには日本語用に注意深く作られた`bxjsarticle`を使用することを想定しています。
-  - 下記のように、documentclassのオプションのLaTeXエンジン指定に`autodetect-engine`を指定しておけば、LaTeXエンジンが自動判定され、pLaTeX+dvipdfmx, LuaLaTeX, XeLaTeX, pdfLaTeXどれでも行けると思います。補足ですが、`jbase=14.1Q`は和文フォントサイズを10ptにする指定です。おおよそ和文フォントの単位(Q:級)では、14.1Q=10ptです。
+- documentclassのスタイルファイルには日本語用に注意深く作られたbxjsarticleを使用することを想定しています。
+  - bxjsarticle使用の場合(推奨): 下記のように、documentclassのオプションのLaTeXエンジン指定に`autodetect-engine`を指定しておけば、LaTeXエンジンが自動判定され、pLaTeX+dvipdfmx, LuaLaTeX, XeLaTeX, pdfLaTeXどれでも行けると思います。補足ですが、`jbase=14.1Q`は和文フォントサイズを10ptにする指定です。おおよそ和文フォントの単位(Q:級)では、14.1Q=10ptです。
   ```
   \documentclass[autodetect-engine,dvi=dvipdfmx,ja=standard,twocolumn,jbase=14.1Q]{bxjsarticle}
   ```
-  - pLaTeX+dvipdfmxの人でどうしても`jsarticle`にしなければならない場合、下記のようにdocumentclassを宣言することで従来の`jsarticle`でも行けると思いますが、推奨しません。英語のみの論文であれば、`article`でも大丈夫です。
+  - jsarticle使用の場合(非推奨): pLaTeX+dvipdfmxの人でどうしてもjsarticleにしなければならない場合、下記のようにdocumentclassを宣言することで従来のjsarticleでも行けると思いますが、推奨しません。英語のみの論文であれば、article(jなし)でも大丈夫です。
   ```
   \documentclass[twocolumn]{jsarticle}
   ```
