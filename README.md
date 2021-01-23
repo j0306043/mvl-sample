@@ -26,9 +26,9 @@
   ```
 - フォーラムの場合は下記のパラメタを設定します。二種研の場合は不要です(設定しても無視されます)。
 ```
-\renewcommand{\mvlvolume}{39} % 多値論理フォーラムの巻号
-\renewcommand{\mvlpresennumber}{1} % 多値論理フォーラムの発表番号
-\renewcommand{\mvlyear}{2016} % 年
+\renewcommand{\mvlvolume}{44} % 多値論理フォーラムの巻号
+\renewcommand{\mvlpresennumber}{3} % 多値論理フォーラムの発表番号
+\renewcommand{\mvlyear}{2021} % 年
 \renewcommand{\mvlmonth}{9} % 月
 ```
 
