@@ -1,5 +1,5 @@
-%%% 多値論理研究会用マクロ
-%%% Time-stamp: <2020-12-24 18:34:21 hirayama>
+%%% 多値論理研究会用スタイルファイル
+%%% Time-stamp: <2021-01-23 10:02:15 hirayama>
 %%%
 %%% パッケージの作り方の参考情報:
 %%% https://en.wikibooks.org/wiki/LaTeX/Creating_Packages
@@ -8,7 +8,7 @@
 %%% \usepackage[mvlforum]{mymvlmacros} (多値論理フォーラムの場合)または
 %%% \usepackage[mvlnishuken]{mymvlmacros} (多値論理二種研の場合)
 %%%
-%%% 多値論理フォーラムでは，LaTeX本文中で，下記のパラメタを設定すること
+%%% 多値論理フォーラムでは、LaTeX本文中で、下記のパラメタを設定すること
 %%% -------
 %%% \renewcommand{\mvlvolume}{27} % 多値論理フォーラムの巻号
 %%% \renewcommand{\mvlpresennumber}{11} % 多値論理フォーラムの発表番号
@@ -21,6 +21,9 @@
 \ProvidesPackage{mymvlmacros}
 
 %\RequirePackage{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ヘッダ部
 
 %% 多値論理フォーラム用のヘッダ
 \newcommand{\mvlvolume}{0}
@@ -37,7 +40,7 @@
 \DeclareOption{mvlforum}{
 \mvltextwidth=170truemm
 \mvltextheight=240truemm
-% 多値論理フォーラムの余白メモ: 上下に25mm，左右に17mm
+% 多値論理フォーラムの余白メモ: 上下に25mm、左右に17mm
 % 多値論理フォーラム用のヘッダを表示する。
  \renewcommand{\@mvlforumheader}{
   \begin{minipage}[b]{\textwidth}
@@ -51,25 +54,25 @@
   \end{minipage}
   }
 \renewcommand{\thepage}{{\mvlpresennumber}--\arabic{page}}
-% 多値論理フォーラムでは，ページ番号をXX-1のようにする。
+% 多値論理フォーラムでは、ページ番号をXX-1のようにする。
 }
 
 %% 'mvlnishuken' option
 \DeclareOption{mvlnishuken}{
 \mvltextwidth=174truemm
 \mvltextheight=250truemm
-% 多値論理二種研の余白メモ: 上下に20mm，左右に15mm
+% 多値論理二種研の余白メモ: 上下に20mm、左右に15mm
 \renewcommand{\thepage}{}
 % 二種研ではページ番号なし
 }
 
 %% 'mvlnishuken'is the default
 \ExecuteOptions{mvlnishuken}
-
 \ProcessOptions\relax %terminates the option processing.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 用紙の余白の設定
+
 \@ifundefined{setpagelayout}
 {
 %% 原始的な方法で、文面を中央に合わせる
@@ -104,7 +107,7 @@
 
 %% 2段組みにおいて、アブストラクトは1段ぶちぬきにする。
 \newcommand{\@myabstract}{}
-\renewcommand{\abstract}[2][概要]{
+\renewcommand{\abstract}[2][\abstractname]{
  \newcommand{\@myabstractcontents}{#2}
  \newcommand{\@myabstractname}{#1}
  \renewcommand{\@myabstract}{
@@ -116,25 +119,25 @@
  }
 }
 %% '\abstract'の使い方例
-%% 例1: 通常は，出だしが「概要:」になる。
-% \abstract{本論文では，新しい下界を与える。}
-% →概要: 本論文では，新しい下界を与える。
-%% 例2: 出だしを変えたいときは，オプション引数で指定する。
-% \abstract[要旨]{本論文では，新しい下界を与える。}
-% →要旨: 本論文では，新しい下界を与える。
+%% 例1: 通常は、出だしが「概要:」になる。
+% \abstract{本論文では、新しい下界を与える。}
+% →概要: 本論文では、新しい下界を与える。
+%% 例2: 出だしを変えたいときは、オプション引数で指定する。
+% \abstract[要旨]{本論文では、新しい下界を与える。}
+% →要旨: 本論文では、新しい下界を与える。
 %% 例3: 英語
 % \abstract[Abstract]{This paper presents a new lower bound.}
 % →Abstract: This paper presents a new lower bound.
 
 %% タイトル
 %%
-%% '\@maketitle'を変更した。
+%% \@maketitleを変更した。
 %% 変更元: jarticle.cls
 %% 主な変更点:
-%% ・タイトルの上に余白を追加していたのを，しないようにした。
+%% ・タイトルの上に余白を追加していたのを、しないようにした。
 %% ・多値論理フォーラム用のヘッダを追加した。
 %% ・ぶちぬきアブストラクトを追加した。
-%% ・'\date'は無視するようにした。
+%% ・\dateは無視するようにした。
 \def\@maketitle{%
   \centering
   \let\footnote\thanks
@@ -150,6 +153,9 @@
   \par\vskip 1.5em
   \@myabstract
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 参考文献
 
 %% 参考文献リストの行間スペースを削減する
 \let\oldbibliography\thebibliography
