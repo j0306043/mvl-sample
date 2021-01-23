@@ -18,9 +18,13 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath}
-%\usepackage{times,mathptm}
-% ギリシャ文字を含めた欧文フォントがTimesになる。
-\DeclareSymbolFont{letters}{OML}{ztmcm}{m}{it}
+%%本文と数式のフォントをTimes(注:New Romanではない)互換フォントにする。
+\usepackage{newtxtext,newtxmath}
+%% 行間を詰める。
+%\renewcommand{\baselinestretch}{0.9}
+%% itemize, enumerate, descriptionに追加される行間をなくす。
+% \usepackage{enumitem}
+% \setlist{topsep=0pt,parsep=0pt,partopsep=0pt,itemsep=0pt}
 
 %% </local definitions here>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
