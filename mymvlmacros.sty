@@ -1,5 +1,5 @@
 %%% 多値論理研究会用スタイルファイル
-%%% Time-stamp: <2021-01-23 11:46:29 hirayama>
+%%% Time-stamp: <2021-02-15 16:21:55 hirayama>
 %%% The official site is the GitHub repository:
 %%% https://github.com/j0306043/mvl-sample
 %%%
@@ -138,15 +138,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 用紙の余白の設定
 
-\@ifundefined{setpagelayout}%% BXjsclsが未読み込みか
-{
-%% geometryパッケージを呼んで、余白を設定する
-\usepackage[top=\@mvltexttop,bottom=\@mvltextbottom,left=\@mvltextleft,right=\@mvltextright,footskip=0.55\@mvltextbottom]{geometry}
-}
-{
-%% BXjsclsのやり方で、文面を中央に合わせる
-\setpagelayout*{top=\@mvltexttop,bottom=\@mvltextbottom,left=\@mvltextleft,right=\@mvltextright,footskip=0.55\@mvltextbottom}
-}
+\ifdefined\setpagelayout%% BXjsclsが読み込み済か
+  %% BXjsclsのやり方で、余白を設定する
+  \setpagelayout*{top=\@mvltexttop,bottom=\@mvltextbottom,left=\@mvltextleft,right=\@mvltextright,footskip=0.55\@mvltextbottom}
+\else
+  %% geometryパッケージを呼んで、余白を設定する
+  \usepackage{geometry}
+  \geometry{top=\@mvltexttop,bottom=\@mvltextbottom,left=\@mvltextleft,right=\@mvltextright,footskip=0.55\@mvltextbottom}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 参考文献
