@@ -19,8 +19,11 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath}
-%%本文と数式のフォントをTimes(注:New Romanではない)互換フォントにする。
-\usepackage{newtxtext,newtxmath}
+%% 本文と数式のフォントをTimes(注:New Romanではない)互換フォントにする。
+%% AMS(数学)関係のパッケージのusepackageよりも後に置くこと。(前に置くと、
+%% AMS関係のパッケージをusepackageしたところでエラーになるので注意)
+\usepackage{newtxtext}
+\usepackage[varg]{newtxmath}
 %% 行間を詰める。
 %\renewcommand{\baselinestretch}{0.9}
 %% itemize, enumerate, descriptionに追加される行間をなくす。
