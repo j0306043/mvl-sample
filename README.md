@@ -45,7 +45,7 @@
 - 参考文献の文字サイズをsmallにします。文献リストの行間スペースを削減します。
 - 対応するTeXのバージョンとしては、TeX Live 2020以降をお使いください。
 - `\documentclass`のクラスファイルには日本語用に注意深く作られたbxjsarticleを使用することを想定しています。
-  - bxjsarticle使用の場合(推奨): 下記のように、`\documentclass`のオプションのLaTeXエンジン指定に`autodetect-engine`を指定しておけば、LaTeXエンジンが自動判定され、pLaTeX+dvipdfmx, LuaLaTeX, XeLaTeX, pdfLaTeXどれでも行けると思います。補足ですが、`jbase=14.1Q`は和文フォントサイズを10ptにする指定です。おおよそ和文フォントの単位(Q:級)では、14.1Q=10ptです。
+  - bxjsarticle使用の場合(推奨): 下記のように、`\documentclass`のオプションのLaTeXエンジン指定に`autodetect-engine`を指定しておけば、LaTeXエンジンが自動判定され、pLaTeX+dvipdfmx, LuaLaTeX, XeLaTeX, pdfLaTeXどれでも行けると思います(が、LuaLaTeXを推奨します)。補足ですが、`jbase=14.1Q`は和文フォントサイズを10ptにする指定です。おおよそ和文フォントの単位(Q:級)では、14.1Q=10ptです。
   ```
   \documentclass[autodetect-engine,dvi=dvipdfmx,ja=standard,twocolumn,jbase=14.1Q]{bxjsarticle}
   ```
